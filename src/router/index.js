@@ -1,17 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import FormularioRecogida from '../views/FormularioRecogida.vue'
+import Formulario from '@/views/Formulario.vue'
 import Confirmacion from '@/views/Confirmacion.vue'
 
 const routes = [
-  {
-    path: '/',
-    name: 'Inicio',
-    component: FormularioRecogida
-  }
-]
-
-const routes = [
-  { path: '/', name: 'Formulario', component: FormularioRecogida },
+  { path: '/', name: 'Formulario', component: Formulario },
   { path: '/confirmacion', name: 'Confirmacion', component: Confirmacion }
 ]
 
