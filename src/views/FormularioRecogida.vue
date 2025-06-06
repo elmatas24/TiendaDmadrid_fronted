@@ -17,8 +17,11 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
-import api from '@/services/api' // usa @ si lo tienes configurado como alias en vite.config.js
+import api from '@/services/api'
+
+const router = useRouter()
 
 const nombre = ref('')
 const telefono = ref('')
@@ -35,7 +38,7 @@ const enviarFormulario = async () => {
   }
 
   try {
-    const response = await api.post('/solicitud', {
+    await api.post('/solicitud', {
       nombre: nombre.value,
       telefono: telefono.value,
       matricula: matricula.value,
@@ -45,16 +48,18 @@ const enviarFormulario = async () => {
       observaciones: observaciones.value,
     })
 
-    Swal.fire('¡Enviado!', 'Tu solicitud ha sido enviada correctamente.', 'success')
-
-    // Limpiar los campos
-    nombre.value = ''
-    telefono.value = ''
-    matricula.value = ''
-    marcaModelo.value = ''
-    direccion.value = ''
-    cp.value = ''
-    observaciones.value = ''
+    router.push({
+      name: 'Confirmacion',
+      query: {
+        nombre: nombre.value,
+        telefono: telefono.value,
+        matricula: matricula.value,
+        marca_modelo: marcaModelo.value,
+        direccion: direccion.value,
+        codigo_postal: cp.value,
+        observaciones: observaciones.value
+      }
+    })
   } catch (error) {
     console.error(error)
     Swal.fire('Error', 'Hubo un problema al enviar la solicitud.', 'error')
