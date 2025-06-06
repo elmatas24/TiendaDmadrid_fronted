@@ -18,7 +18,7 @@
 <script setup>
 import { ref } from 'vue'
 import Swal from 'sweetalert2'
-import api from '../services/api'
+import api from '@/services/api' // usa @ si lo tienes configurado como alias en vite.config.js
 
 const nombre = ref('')
 const telefono = ref('')
@@ -46,7 +46,8 @@ const enviarFormulario = async () => {
     })
 
     Swal.fire('¡Enviado!', 'Tu solicitud ha sido enviada correctamente.', 'success')
-    // Limpia campos
+
+    // Limpiar los campos
     nombre.value = ''
     telefono.value = ''
     matricula.value = ''
